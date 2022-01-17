@@ -12,6 +12,7 @@ const DUMMY_QUOTES = [
 const QuoteDetails = () => {
   // For displaing quoteId ?
   const params = useParams()
+  //const paramsId = +params.quoteID
 
   const quote = DUMMY_QUOTES.find(content => content.id === params.quoteId)
 
