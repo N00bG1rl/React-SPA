@@ -1,10 +1,13 @@
-import { useRef } from 'react'
+import { Fragment, useRef, useState } from 'react'
+import { Prompt } from 'react-router-dom'
 
 import Card from '../UI/Card'
 import LoadingSpinner from '../UI/LoadingSpinner'
 import styles from './QuoteForm.module.css'
 
 const QuoteForm = props => {
+  const [isFormFocus, setIsFormFocus] = useState(false)
+
   const authorInputRef = useRef()
   const textInputRef = useRef()
 
@@ -19,28 +22,49 @@ const QuoteForm = props => {
     props.onAddQuote({ author: enteredAuthor, text: enteredText })
   }
 
-  return (
-    <Card>
-      <form className={styles.form} onSubmit={handleFormSubmit}>
-        {props.isLoading && (
-          <div className={styles.loading}>
-            <LoadingSpinner />
-          </div>
-        )}
+  const handleFormFocus = () => {
+    setIsFormFocus(true)
+  }
 
-        <div className={styles.control}>
-          <label htmlFor='author'>Author</label>
-          <input type='text' id='author' ref={authorInputRef} />
-        </div>
-        <div className={styles.control}>
-          <label htmlFor='text'>Text</label>
-          <textarea id='text' rows='5' ref={textInputRef}></textarea>
-        </div>
-        <div className={styles.actions}>
-          <button className='btn'>Add Quote</button>
-        </div>
-      </form>
-    </Card>
+  // Wont work inside form submit handlerer, it wont get there
+  const handleFocus = () => {
+    setIsFormFocus(false)
+  }
+
+  return (
+    <Fragment>
+      <Prompt
+        when={isFormFocus}
+        message={location => 'Are you sure you want to leave?'}
+      />
+      <Card>
+        <form
+          onFocus={handleFormFocus}
+          className={styles.form}
+          onSubmit={handleFormSubmit}
+        >
+          {props.isLoading && (
+            <div className={styles.loading}>
+              <LoadingSpinner />
+            </div>
+          )}
+
+          <div className={styles.control}>
+            <label htmlFor='author'>Author</label>
+            <input type='text' id='author' ref={authorInputRef} />
+          </div>
+          <div className={styles.control}>
+            <label htmlFor='text'>Text</label>
+            <textarea id='text' rows='5' ref={textInputRef}></textarea>
+          </div>
+          <div className={styles.actions}>
+            <button onClick={handleFocus} className='btn'>
+              Add Quote
+            </button>
+          </div>
+        </form>
+      </Card>
+    </Fragment>
   )
 }
 
