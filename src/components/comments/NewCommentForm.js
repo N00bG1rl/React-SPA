@@ -7,10 +7,6 @@ const NewCommentForm = props => {
 
   const handleFormSubmit = event => {
     event.preventDefault()
-
-    // optional: Could validate here
-
-    // send comment to server
   }
 
   return (
