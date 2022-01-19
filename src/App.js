@@ -22,9 +22,9 @@ function App() {
       >
         <Switch>
           <Route path='/' exact>
-            <Redirect to='/react-app/quotes' />
+            <Redirect to='/quotes' />
           </Route>
-          <Route path='/react-app/quotes' exact>
+          <Route path='/quotes' exact>
             <AllQuotes />
           </Route>
           <Route path='/quotes/:quoteId'>
