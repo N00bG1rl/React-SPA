@@ -13,6 +13,10 @@ January 18, 2022
 - Firebase
 - CSS modules
 
+# View on browser
+
+## [https://floating-falls-94742.herokuapp.com/quotes](https://floating-falls-94742.herokuapp.com/quotes)
+
 # View as image
 
 ![github](./public/github.png)
